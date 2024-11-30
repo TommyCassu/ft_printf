@@ -6,19 +6,20 @@
 /*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 14:10:40 by toto              #+#    #+#             */
-/*   Updated: 2024/11/30 23:43:39 by toto             ###   ########.fr       */
+/*   Updated: 2024/11/30 23:51:12 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdarg.h>
-#include "libft/libft.h"
+#include "libft.h"
 
 int	print_string(char *str)
 {
 	ft_putstr_fd(str, 1);
 	return (0);
 }
+
 
 int	print_char(char c)
 {
