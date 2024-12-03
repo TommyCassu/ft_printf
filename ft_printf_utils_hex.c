@@ -6,13 +6,14 @@
 /*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 23:44:39 by toto              #+#    #+#             */
-/*   Updated: 2024/12/03 14:28:14 by toto             ###   ########.fr       */
+/*   Updated: 2024/12/03 22:41:31 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/ft_printf.h"
 #include "./includes/libft.h"
 
+/* Count number of digit with base hexadecimal */
 int	ft_countdigit_hex(unsigned long long nb)
 {
 	int	i;
@@ -25,32 +26,31 @@ int	ft_countdigit_hex(unsigned long long nb)
 		nb /= 16;
 		i++;
 	}
-	//printf(" i = %d\n", i);
 	return (i);
 }
 
-
+/* Write %p address of a pointeur */
 void	print_address(unsigned long long nb, size_t *compteur)
 {
 	int		len;
 	char	*digit;
-	char	*hex;
+	char	*base_hex;
 
-	hex = "0123456789abcdef";	
+	base_hex = "0123456789abcdef";
 	if (nb == 0)
 	{
 		ft_putstr_fd("(nil)", 1);
-		(*compteur)+= 5;
+		(*compteur) += 5;
 		return ;
 	}
 	ft_putstr_fd("0x", 1);
 	len = ft_countdigit_hex(nb);
-	(*compteur)+= len + 1;
+	(*compteur) += len + 1;
 	digit = ft_calloc(len + 1, sizeof(char));
 	while (len)
 	{
 		len--;
-		digit[len] = hex[nb % 16];
+		digit[len] = base_hex[nb % 16];
 		nb /= 16;
 	}
 	ft_putstr_fd(digit, 1);
@@ -58,14 +58,14 @@ void	print_address(unsigned long long nb, size_t *compteur)
 	free(digit);
 }
 
+/* Write %x hexadecimal base in lowercase*/
 void	print_hex(unsigned int nb, size_t *compteur)
 {
 	int		len;
 	char	*digit;
-	char	*hex;
+	char	*base_hex;
 
-	//printf("base : %lld\n", nb);
-	hex = "0123456789abcdef";	
+	base_hex = "0123456789abcdef";
 	if (nb == 0)
 	{
 		ft_putchar_fd('0', 1);
@@ -73,26 +73,26 @@ void	print_hex(unsigned int nb, size_t *compteur)
 		return ;
 	}
 	len = ft_countdigit_hex(nb);
-	(*compteur)+= len;
+	(*compteur) += len;
 	digit = ft_calloc(len + 1, sizeof(char));
 	while (len)
 	{
 		len--;
-		digit[len] = hex[nb % 16];
+		digit[len] = base_hex[nb % 16];
 		nb /= 16;
 	}
-	//printf("digit = %s\n", digit);
 	ft_putstr_fd(digit, 1);
 	free(digit);
 }
 
+/* Write %x hexadecimal base in uppercase*/
 void	print_hex_upper(unsigned int nb, size_t *compteur)
 {
 	int		len;
 	char	*digit;
-	char	*hex;
+	char	*base_hex;
 
-	hex = "0123456789ABCDEF";	
+	base_hex = "0123456789ABCDEF";
 	if (nb == 0)
 	{
 		ft_putchar_fd('0', 1);
@@ -100,12 +100,12 @@ void	print_hex_upper(unsigned int nb, size_t *compteur)
 		return ;
 	}
 	len = ft_countdigit_hex(nb);
-	(*compteur)+= len;
+	(*compteur) += len;
 	digit = ft_calloc(len + 1, sizeof(char));
 	while (len)
 	{
 		len--;
-		digit[len] = hex[nb % 16];
+		digit[len] = base_hex[nb % 16];
 		nb /= 16;
 	}
 	ft_putstr_fd(digit, 1);

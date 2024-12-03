@@ -6,13 +6,14 @@
 /*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 23:44:39 by toto              #+#    #+#             */
-/*   Updated: 2024/12/03 02:48:15 by toto             ###   ########.fr       */
+/*   Updated: 2024/12/03 22:43:03 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/ft_printf.h"
 #include "./includes/libft.h"
 
+/* Write %s s string */
 int	print_string(char *str, size_t *compteur)
 {
 	if (!str)

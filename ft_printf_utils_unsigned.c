@@ -6,16 +6,16 @@
 /*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 23:44:39 by toto              #+#    #+#             */
-/*   Updated: 2024/12/03 14:37:50 by toto             ###   ########.fr       */
+/*   Updated: 2024/12/03 22:43:55 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/ft_printf.h"
 #include "./includes/libft.h"
 
-int	ft_countdigit_unsigned(unsigned long nb)
+/* Count the number of digit */
+int	ft_countdigit_unsigned(unsigned int nb)
 {
-	printf("%ld\n", nb);
 	int	i;
 
 	i = 0;
@@ -29,29 +29,27 @@ int	ft_countdigit_unsigned(unsigned long nb)
 	return (i);
 }
 
-void	print_unsigned(int nb, size_t *compteur)
+/* Write %u a unsigned int */
+void	print_unsigned(unsigned int nb, size_t *compteur)
 {
 	int		len;
 	char	*digit;
-	char	*hex;
 
-	hex = "0123456789";	
 	if (nb == 0)
 	{
-		ft_putstr_fd("(nil)", 1);
-		(*compteur)+= 5;
+		ft_putchar_fd('0', 1);
+		(*compteur)++;
 		return ;
 	}
 	len = ft_countdigit_unsigned(nb);
-	(*compteur)+= len + 1;
+	(*compteur) += len;
 	digit = ft_calloc(len + 1, sizeof(char));
 	while (len)
 	{
 		len--;
-		digit[len] = hex[nb % 10];
+		digit[len] = (nb % 10) + '0';
 		nb /= 10;
 	}
 	ft_putstr_fd(digit, 1);
-	(*compteur)++;
 	free(digit);
 }
