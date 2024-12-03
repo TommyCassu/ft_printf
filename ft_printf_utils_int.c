@@ -1,47 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils_alnum.c                            :+:      :+:    :+:   */
+/*   ft_printf_utils_int.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 23:44:39 by toto              #+#    #+#             */
-/*   Updated: 2024/12/01 00:21:30 by toto             ###   ########.fr       */
+/*   Updated: 2024/12/03 02:47:51 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/ft_printf.h"
 #include "./includes/libft.h"
 
-int	print_string(char *str)
+int	ft_countdigit(int nb)
 {
-	ft_putstr_fd(str, 1);
-	return (0);
-}
+	int	i;
+	int	sign;
 
-int	print_char(char c)
-{
-	write(1, &c, 1);
-	return (0);
+	i = 0;
+	sign = 0;
+	if (nb == 0)
+		return (1);
+	if (nb < 0)
+	{
+		sign = 1;
+		nb *= -1;
+	}
+	while (nb)
+	{
+		nb /= 10;
+		i++;
+	}
+	return (i + sign);
 }
-
-int	print_nbr(int nbr)
+int	print_nbr(int nbr, size_t *compteur)
 {
+	(*compteur) += ft_countdigit(nbr);
 	ft_putnbr_fd(nbr, 1);
 	return (0);
 }
 
-void	print_unsigned(long nb)
-{
-	if (nb < 0)
-	{
-		ft_putnbr_fdd((4294967296  - (-nb)), 1);
-	
-	}
-	ft_putnbr_fdd(nb, 1);
-}
-
-void	ft_putchar_fd(char c, int fd)
-{
-	write(fd, &c, 1);
-}

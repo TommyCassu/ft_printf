@@ -6,49 +6,47 @@
 /*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 14:10:40 by toto              #+#    #+#             */
-/*   Updated: 2024/12/01 00:21:25 by toto             ###   ########.fr       */
+/*   Updated: 2024/12/03 03:11:52 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+void	parsing_flags(va_list arguments, char *format, size_t *compteur, size_t *i)
 {
-	size_t	i;
+	if (format[*i+1] == 'c')
+		print_char(va_arg(arguments, int), compteur);
+	else if (format[*i+1] == 's')
+		print_string(va_arg(arguments, char *), compteur);
+	else if (format[*i+1] == 'd' || format[*i+1] == 'i')
+		print_nbr(va_arg(arguments, int), compteur);
+	else if (format[*i+1] == '%')
+		print_char('%', compteur);
+	(*i)++;
+	compteur++;
+}
+int	ft_printf(char const *format, ...)
+{
 	va_list	arguments;
-
+	size_t	i;
+	size_t	compteur;
+	
 	va_start(arguments, format);
 	i = 0;
+	compteur = 0;
 	while (format[i] != '\0')
 	{
+		
 		if (format[i] == '%')
 		{
-			if (format[i+1] == 's')
-				print_string(va_arg(arguments, char *));
-			else if (format[i+1] == 'c')
-				print_char(va_arg(arguments, int));
-			else if (format[i+1] == 'd')
-				print_nbr(va_arg(arguments, int));
-			else if (format[i+1] == 'i')
-				print_nbr(va_arg(arguments, int));
-			else if (format[i+1] == 'x')
-				print_hex(va_arg(arguments, unsigned long));
-			else if (format[i+1] == 'X')
-				print_hex_upper(va_arg(arguments, unsigned long));
-			else if (format[i+1] == '%')
-				print_char('%');
-			else if (format[i+1] == 'p')
-			{
-				print_string("0x");
-				print_hex(va_arg(arguments, unsigned long));
-			}
-			else if (format[i+1] == 'u')
-				print_unsigned(va_arg(arguments, long));
-			i++;
+			parsing_flags(arguments, (char *)format, &compteur, &i);
 		}
 		else
+		{
 			ft_putchar_fd(format[i], 1);
+			compteur++;
+		}
 		i++;
 	}
-	return (0);
+	return (compteur);
 }
