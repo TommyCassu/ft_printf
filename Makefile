@@ -6,11 +6,11 @@
 #    By: toto <toto@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/07 17:43:09 by marvin            #+#    #+#              #
-#    Updated: 2024/12/03 03:04:09 by toto             ###   ########.fr        #
+#    Updated: 2024/12/03 14:21:40 by toto             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC			= ft_printf.c ft_printf_utils_char.c ft_printf_utils_int.c ft_printf_utils_str.c ft_printf_utils_hex.c
+SRC			= ft_printf.c ft_printf_utils_char.c ft_printf_utils_int.c ft_printf_utils_str.c ft_printf_utils_unsigned.c ft_printf_utils_hex.c
 
 SRCS 		= ${SRC}
 

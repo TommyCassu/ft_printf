@@ -6,7 +6,7 @@
 /*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 21:24:38 by toto              #+#    #+#             */
-/*   Updated: 2024/11/11 00:44:22 by toto             ###   ########.fr       */
+/*   Updated: 2024/11/15 00:37:01 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_itoa(int nb)
 	nbdigit = ft_countdigit(nbr);
 	result = (char *)malloc(sizeof(char) * (nbdigit + 1));
 	if (!result)
-		return (0);
+		return (NULL);
 	if (nbr < 0)
 	{
 		result[0] = '-';
@@ -54,12 +54,10 @@ char	*ft_itoa(int nb)
 		nbr *= -1;
 	}
 	result[nbdigit] = '\0';
-	nbdigit--;
-	while (nbdigit >= sign)
+	while (--nbdigit >= sign)
 	{
 		result[nbdigit] = (nbr % 10) + '0';
 		nbr /= 10;
-		nbdigit--;
 	}
 	return (result);
 }

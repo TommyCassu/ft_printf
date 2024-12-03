@@ -6,7 +6,7 @@
 /*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 01:43:51 by toto              #+#    #+#             */
-/*   Updated: 2024/11/11 00:46:24 by toto             ###   ########.fr       */
+/*   Updated: 2024/11/22 22:51:48 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*ft_strrchr(const char *s, int c)
 {
 	int	i;
 
-	i = strlen(s);
+	i = ft_strlen(s);
 	if ((char)c == '\0')
 		return ((char *)s + i);
 	c = c % 256;

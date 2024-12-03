@@ -6,7 +6,7 @@
 /*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:37:22 by toto              #+#    #+#             */
-/*   Updated: 2024/11/10 21:52:15 by toto             ###   ########.fr       */
+/*   Updated: 2024/11/23 01:00:10 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,26 @@
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
+	size_t	sizelittle;
 	size_t	i;
 	size_t	j;
-	size_t	size;
 
-	j = 0;
 	i = 0;
-	size = ft_strlen(little);
-	if (size == 0)
+	if (big == NULL)
+		return (NULL);
+	if (*little == '\0')
 		return ((char *)big);
-	while (i < len && big[0] != '\0')
+	sizelittle = ft_strlen(little);
+	if (sizelittle > len)
+		return (NULL);
+	while (big[i] != '\0' && i <= len - sizelittle)
 	{
-		if (little[j] == big[0])
+		j = 0;
+		while (big[i + j] == little[j] && j < sizelittle)
 			j++;
-		if (size == j)
-		{
-			return ((char *)big - j + 1);
-		}
-		big++;
+		if (j == sizelittle)
+			return ((char *)big + i);
 		i++;
 	}
-	return (0);
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 14:10:40 by toto              #+#    #+#             */
-/*   Updated: 2024/12/03 03:11:52 by toto             ###   ########.fr       */
+/*   Updated: 2024/12/03 14:18:04 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ void	parsing_flags(va_list arguments, char *format, size_t *compteur, size_t *i)
 		print_nbr(va_arg(arguments, int), compteur);
 	else if (format[*i+1] == '%')
 		print_char('%', compteur);
+	else if (format[*i+1] == 'p')
+		print_address((unsigned long long)(va_arg(arguments, unsigned long)), compteur);
+	else if (format[*i+1] == 'u')
+		print_unsigned(va_arg(arguments, int), compteur);
 	(*i)++;
 	compteur++;
 }

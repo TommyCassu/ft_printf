@@ -6,12 +6,23 @@
 /*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 18:59:18 by toto              #+#    #+#             */
-/*   Updated: 2024/11/10 22:16:45 by toto             ###   ########.fr       */
+/*   Updated: 2024/11/23 00:03:10 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "libft.h"
+
+void	ft_free(char **result)
+{
+	int	i;
+
+	i = 0;
+	while (result[i])
+	{
+		free(result[i]);
+		i++;
+	}
+}
 
 int	ft_countword(const char *str, char c)
 {
@@ -51,16 +62,14 @@ char	*ft_strcpy(const char *src, char *dest, int debut, int fin)
 	return (dest);
 }
 
-void	ft_set_string(const char *str, char **result, char c)
+char	**ft_set_string(const char *str, char **result, char c)
 {
 	int		i;
 	int		debut;
-	int		fin;
-	int		actualword;
-	char	*word;
+	int		aw;
 
 	i = 0;
-	actualword = 0;
+	aw = 0;
 	while (str[i] != '\0')
 	{
 		while (str[i] == c)
@@ -68,15 +77,18 @@ void	ft_set_string(const char *str, char **result, char c)
 		debut = i;
 		while (str[i] != c && str[i] != '\0')
 			i++;
-		fin = i - 1;
-		if (actualword < ft_countword(str, c))
+		if (aw < ft_countword(str, c))
 		{
-			word = (char *)malloc(sizeof(char) * (fin - debut + 1) + 1);
-			result[actualword] = ft_strcpy(str, word, debut, fin);
-			actualword++;
+			result[aw] = (char *)malloc(sizeof(char) * ((i - 1)
+						- debut + 1) + 1);
+			if (!result[aw])
+				return (NULL);
+			result[aw] = ft_strcpy(str, result[aw], debut, (i - 1));
+			aw++;
 		}
 	}
-	result[actualword] = 0;
+	result[aw] = 0;
+	return (result);
 }
 
 char	**ft_split(char const *str, char c)
@@ -84,24 +96,13 @@ char	**ft_split(char const *str, char c)
 	char	**result;
 
 	result = (char **)malloc(sizeof(char *) * (ft_countword(str, c) + 1));
-	ft_set_string(str, result, c);
+	if (!result)
+		return (NULL);
+	if (!ft_set_string(str, result, c))
+	{
+		ft_free(result);
+		free(result);
+		return (NULL);
+	}
 	return (result);
 }
-/*
-int	main(void)
-{
-	char	str[] = " toto va al plage a    ";
-    
-    char **result;
-    result = ft_split(str);
-    int i;
-    i = 0;
-    while(result[i] != 0)
-    {
-        printf("[%s]\n", result[i]);
-        free(result[i]);
-        i++;
-    }
-    free(result);
-}
-*/

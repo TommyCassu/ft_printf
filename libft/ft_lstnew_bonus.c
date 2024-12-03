@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcassu <tcassu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 11:15:22 by tcassu            #+#    #+#             */
-/*   Updated: 2024/11/06 15:37:32 by tcassu           ###   ########.fr       */
+/*   Updated: 2024/11/25 19:59:16 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_list	*ft_lstnew(void *content)
 	list = malloc(sizeof(t_list));
 	if (!list)
 		return (NULL);
-	list->context = content;
+	list->content = content;
 	list->next = NULL;
 	return (list);
 }
