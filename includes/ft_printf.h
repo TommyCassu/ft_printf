@@ -23,9 +23,10 @@ int	print_nbr(int nbr, size_t *compteur);
 void	print_unsigned(int nbr, size_t *compteur);
 int	ft_countdigit_hex(unsigned long long nb);
 void	print_address(unsigned long long nb, size_t *compteur);
-void	print_hex(unsigned long long nb, size_t *compteur);
-void	print_hex_upper(void *nb, size_t *compteur);
+void	print_hex(unsigned int nb, size_t *compteur);
+void	print_hex_upper(unsigned int nb, size_t *compteur);
 void	ft_putchar_fd(char c, int fd);
 int	ft_printf(const char *format, ...);
+//void	print_hex(unsigned long nb, size_t *compteur);
 
 #endif

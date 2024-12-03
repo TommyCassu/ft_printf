@@ -25,6 +25,7 @@ int	ft_countdigit_hex(unsigned long long nb)
 		nb /= 16;
 		i++;
 	}
+	//printf(" i = %d\n", i);
 	return (i);
 }
 
@@ -54,5 +55,59 @@ void	print_address(unsigned long long nb, size_t *compteur)
 	}
 	ft_putstr_fd(digit, 1);
 	(*compteur)++;
+	free(digit);
+}
+
+void	print_hex(unsigned int nb, size_t *compteur)
+{
+	int		len;
+	char	*digit;
+	char	*hex;
+
+	//printf("base : %lld\n", nb);
+	hex = "0123456789abcdef";	
+	if (nb == 0)
+	{
+		ft_putchar_fd('0', 1);
+		(*compteur)++;
+		return ;
+	}
+	len = ft_countdigit_hex(nb);
+	(*compteur)+= len;
+	digit = ft_calloc(len + 1, sizeof(char));
+	while (len)
+	{
+		len--;
+		digit[len] = hex[nb % 16];
+		nb /= 16;
+	}
+	//printf("digit = %s\n", digit);
+	ft_putstr_fd(digit, 1);
+	free(digit);
+}
+
+void	print_hex_upper(unsigned int nb, size_t *compteur)
+{
+	int		len;
+	char	*digit;
+	char	*hex;
+
+	hex = "0123456789ABCDEF";	
+	if (nb == 0)
+	{
+		ft_putchar_fd('0', 1);
+		(*compteur)++;
+		return ;
+	}
+	len = ft_countdigit_hex(nb);
+	(*compteur)+= len;
+	digit = ft_calloc(len + 1, sizeof(char));
+	while (len)
+	{
+		len--;
+		digit[len] = hex[nb % 16];
+		nb /= 16;
+	}
+	ft_putstr_fd(digit, 1);
 	free(digit);
 }

@@ -1,3 +1,5 @@
 .vscode/settings.json
 test_printf
 main.c
+libftprintf.a
+libft/libft.a

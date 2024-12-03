@@ -23,9 +23,11 @@ void	parsing_flags(va_list arguments, char *format, size_t *compteur, size_t *i)
 	else if (format[*i+1] == '%')
 		print_char('%', compteur);
 	else if (format[*i+1] == 'p')
-		print_address((unsigned long long)(va_arg(arguments, unsigned long)), compteur);
-	else if (format[*i+1] == 'u')
-		print_unsigned(va_arg(arguments, int), compteur);
+		print_address((unsigned long long)(va_arg(arguments, unsigned long long)), compteur);
+	else if (format[*i+1] == 'x')
+		print_hex((va_arg(arguments, unsigned int)), compteur);
+	else if (format[*i+1] == 'X')
+		print_hex_upper((va_arg(arguments, unsigned int)), compteur);
 	(*i)++;
 	compteur++;
 }
